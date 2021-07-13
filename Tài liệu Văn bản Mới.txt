@@ -1,0 +1,25 @@
+                       Buổi 1 :
+
+                  php artisan serve : Khởi chạy serve ảo k cần dùng xampp
+
+                 
+                       Buổi 2 : migration vs quản lý database
+ php artisan make:migration create_products_table   :  lệnh tạo 1 bảng mới trong database
+
+ php artisan migrate  : lệnh chạy up những thay đổi trong migrate lên database
+
+ php artisan make:migration update_products_table --table=<tên bảng> : thêm cột vào bảng trong migrate
+
+ php artisan migrate : rollback / xóa về phiên bản database cũ
+                     : refessh     xòa hết về đầu tiền  không có gì       
+                      :fessh
+
+
+
+                        Buổi 3 :  fake dữ liệu lên data
+         
+          php artisan make:seeder tên file :  tạo seeder để fake dữ liệu bảng
+          php artisan <db:seed> :  khởi chạy fake dữ liệu
+                    
+
+                        Buổi 4 :
