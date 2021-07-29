@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\Admin\User\StoreRequest;
+use App\Http\Requests\Admin\User\UpdateUpdateRequest;
 
 class UserController extends Controller 
 {
@@ -47,11 +48,11 @@ class UserController extends Controller
         $data = User::find($id);
         return view('admin/users/edit', ['data' => $data]);
     }
-    public function update($id)
+    public function update(UpdateUpdateRequest $request, User $user)
     {
-        $user = User::find($id);
-        $data = request()->except("_token");
-        // gửi dữ liệu lên 2 cách
+        $user = User::find($user);
+        $data = $request->except("_token");
+      
         $user->update($data);
         return redirect()->route('admin.users.index');
     }

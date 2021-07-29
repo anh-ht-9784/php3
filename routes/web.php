@@ -39,7 +39,7 @@ Route::group([
     // Route::get('/{id}', 'UserController@show')->name('show');
     Route::post('store', 'UserController@store')->name('store');
     Route::get('edit/{id}', 'UserController@edit')->name('edit');
-    Route::post('update/{id}', 'UserController@update')->name('update');
+    Route::post('update/{user}', 'UserController@update')->name('update');
     Route::post('delete/{id}', 'UserController@delete')->name('delete');
     });
 

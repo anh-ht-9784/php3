@@ -5,41 +5,45 @@
         @csrf
         <div class="row">
             <div class="col-md-12">
-                <input type="text" class="form-control" name="name" placeholder="Tên">
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Tên">
                 @error('name')
                     <span class="">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-md-12">
-                <input type="text" class="form-control" name="email" placeholder="Email">
+                <input type="text" class="form-control" value="{{ old('email') }}" name="email" placeholder="Email">
                 @error('email')
                     <span class="">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-md-12">
-                <input type="text" class="form-control" placeholder="Địa Chỉ" name="address">
+                <input type="text" class="form-control" value="{{ old('address') }}" placeholder="Địa Chỉ" name="address">
                 @error('address')
                     <span class="">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-md-12">
                 <input type="text" class="form-control" placeholder="password" name="password">
-                @error('address')
+                @error('password')
                     <span class="">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-md-6">
                 <label>Giới Tính</label>
                 <select id="inputState" name="gender" class="form-control">
-                    <option selected value="1">Nam</option>
-                    <option value="2">Nữ</option>
+                    <option {{ old('gender',config('common.user.gender.male')) == config('common.user.gender.male') ? 'selected' : '' }}
+                        value="{{ config('common.user.gender.male') }}">Nam</option>
+                    <option {{ old('gender',config('common.user.gender.female')) == config('common.user.gender.female') ? 'selected' : '' }}
+                        value="{{ config('common.user.gender.female') }}">Nữ</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label>vai Trò</label>
                 <select id="inputState" name="role" class="form-control">
-                    <option selected value="1">Khách hàng</option>
-                    <option value="2">Quản trị</option>
+                    <option {{ old('role',config('common.user.role.user')) == config('common.user.role.user') ? 'selected' : '' }}
+                        value="{{ config('common.user.role.user') }}">Khách hàng</option>
+                    <option {{ old('role',config('common.user.role.admin')) == config('common.user.role.admin') ? 'selected' : '' }}
+                        value="{{ config('common.user.role.admin') }}">Quản trị</option>
                 </select>
             </div>
         </div>

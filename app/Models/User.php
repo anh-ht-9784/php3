@@ -39,10 +39,16 @@ class User extends Authenticatable
     }
     public function setPasswordAttribute($value){
         // tên function bắt buộc phai đặt đung
-         $hased =bcrypt($value) ;
-          $this->attributes['password'] = $hased ;
+        $hased =bcrypt($value) ;
+       return $value = $this->attributes['password'] = $hased ;
           
     }
+    // public function getPasswordAttribute($value){
+    //     // tên function bắt buộc phai đặt đung
+    //      $hased =bcrypt($value) ;
+    //       $this->attributes['password'] = $hased ;
+          
+    // }
     /**
      * The attributes that should be cast to native types.
      *

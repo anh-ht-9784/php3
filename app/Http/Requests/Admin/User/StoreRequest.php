@@ -50,8 +50,8 @@ class StoreRequest extends FormRequest
           'email'=>'Email',
           'password'=>'Mật Khẩu',
           'address'=>'Địa Chỉ',
-          'role'=>'tài Khoản',
-          'gender'=>'Giới Tính',
+        //   'role'=>'tài Khoản',
+        //   'gender'=>'Giới Tính',
 
         ];
     }
