@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'gender',
+        'role',
     ];
 
     /**
@@ -31,7 +34,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function invoices(){
+        return $this->hasMany(Invoice::class, 'user_id' , 'id');
+    }
+    public function setPasswordAttribute($value){
+        // tên function bắt buộc phai đặt đung
+         $hased =bcrypt($value) ;
+          $this->attributes['password'] = $hased ;
+          
+    }
     /**
      * The attributes that should be cast to native types.
      *

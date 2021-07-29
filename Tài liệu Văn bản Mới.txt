@@ -1,25 +1,41 @@
-                       Buổi 1 :
+                       Buổi 1 :https://meet.google.com/kuw-tyri-pmp
 
-                  php artisan serve : Khởi chạy serve ảo k cần dùng xampp
+            php artisan serve : Khởi chạy serve ảo k cần dùng xampp
 
                  
                        Buổi 2 : migration vs quản lý database
- php artisan make:migration create_products_table   :  lệnh tạo 1 bảng mới trong database
+           php artisan make:migration create_products_table   :  lệnh tạo 1 bảng mới trong database
 
- php artisan migrate  : lệnh chạy up những thay đổi trong migrate lên database
+           php artisan migrate  : lệnh chạy up những thay đổi trong migrate lên database
 
- php artisan make:migration update_products_table --table=<tên bảng> : thêm cột vào bảng trong migrate
+           php artisan make:migration update_products_table --table=<tên bảng> : thêm cột vào bảng trong migrate
 
- php artisan migrate : rollback / xóa về phiên bản database cũ
-                     : refessh     xòa hết về đầu tiền  không có gì       
-                      :fessh
+           php artisan migrate : rollback / xóa về phiên bản database cũ
+                               : refessh     xòa hết về đầu tiền  không có gì       
+                               :fessh
 
 
 
                         Buổi 3 :  fake dữ liệu lên data
          
-          php artisan make:seeder tên file :  tạo seeder để fake dữ liệu bảng
-          php artisan <db:seed> :  khởi chạy fake dữ liệu
-                    
+           php artisan make:seeder tên file :  tạo seeder để fake dữ liệu bảng
+           php artisan <db:seed> :  khởi chạy fake dữ liệu
+                     
 
-                        Buổi 4 :
+                        Buổi 4 : Làm việc với model vs database
+ 
+           php artisan make:moodel <name> : Tạo model.
+         
+           Quy tắc đặt tên:
+           -tên table trong Db : viết thường có S (users,products....:
+           -Tên model: viết hoa chữ đầu mỗi từ  k có S cuối (User , Product ,SinhVien,LopHoc...)
+           Làm việc với Model: 
+           Lấy dữ liệu từ form :
+              -  Hàm laravel quy định sẵn  $_REQUEST = request()->all() 
+              -  Lấy toàn bộ sữ liệu gửi lên trừ _token dùng : request()->except("_token)
+
+                       Buổi 5 : Làm việc với controller
+            
+            php artisan make:controller admin/UserController :  Tạo Controller
+
+            php artisan make:request Admin/User/StoreRequest  : Tạo requesst

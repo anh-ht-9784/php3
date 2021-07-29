@@ -1,9 +1,9 @@
 @extends("layout")
-@section('title', 'Tạo Mới Danh Mục')
+@section('title', 'List Products')
 @section('content')
     <div class="row">
         <div class="col-6">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-success">Creat</a>
+            <a href="{{ route('admin.products.create') }}" class="btn btn-success">Creat</a>
         </div>
     </div>
     @if (!empty($data))
@@ -12,29 +12,26 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">tên</th>
-                    <th scope="col">email</th>
-                    <th scope="col">địa chỉ</th>
-                    <th scope="col">Số Đơn </th>
-                    <th scope="col">giới tính</th>
-                    <th scope="col">Quyền</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số Lượng</th>
+                    <th scope="col">Danh Mục</th>
+                    <th scope="col">Ảnh</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $c)
                     <tr>
                         <th scope="row">{{ $c->id }}</th>
-                        <td><a href="{{ route('admin.users.show', ['user' => $c->id]) }}">{{ $c->name }}</a></td>
-                        <td>{{ $c->email }}</td>
-                        <td>{{ $c->address }}</td>
-                        <td>{{ $c->invoices()->count() }}</td>
+                        <td>{{ $c->name }}</td>
+                        <td>{{ $c->price }}</td>
+                        <td>{{ $c->quantity }}</td>
+                        <td>{{ $c->categories->name }}</td>
                         <td>
-                            {{ $c->gender == config('common.user.gender.male') ? 'nam' : 'nữ' }}
+                            <image src="{{ $c->image }}">
                         </td>
+
                         <td>
-                            {{ $c->role == config('common.user.role.user') ? 'Khách hàng' : 'Admin' }}
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.users.edit', ['id' => $c->id]) }}" class="btn btn-primary">Update</a>
+                            <a href="{{ route('admin.products.edit', ['id' => $c->id]) }}" class="btn btn-primary">Update</a>
                         </td>
                         <td>
                             <button class="btn btn-primary" data-toggle="modal"
@@ -54,7 +51,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <form action="{{ route('admin.users.delete', ['id' => $c->id]) }}"
+                                            <form action="{{ route('admin.products.delete', ['id' => $c->id]) }}"
                                                 method="post">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary">Xóa</button>
