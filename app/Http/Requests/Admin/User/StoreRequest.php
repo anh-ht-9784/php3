@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
            'name' =>'required|max:100' ,
-           'password' =>'required|email|min:8|max:100' ,
+           'password' =>'required|min:8|max:100' ,
            'email' =>'required |email|unique:users,email' ,
         //    unique : check trùng.
           'address'=>'required',
@@ -55,4 +55,10 @@ class StoreRequest extends FormRequest
 
         ];
     }
+    
+    // protected function failedValidation(Validation $validation){
+    //     if($this->ajax() == false){
+
+    //     }
+    // }
 }

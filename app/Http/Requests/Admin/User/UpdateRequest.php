@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\RuleEmailUniqueOnUpdateUser;
-class UpdateUpdateRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true; //
     }
 
     /**
@@ -26,7 +26,7 @@ class UpdateUpdateRequest extends FormRequest
 
         return [
             'name' => 'required|max:100',
-            'password' => 'required|email|min:8|max:100',
+          
             'email' => [
                 'required',
                 new RuleEmailUniqueOnUpdateUser(),

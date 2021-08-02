@@ -36,7 +36,7 @@ class RuleEmailUniqueOnUpdateUser implements Rule
         if($kiemtra>0){
             return false;
         }
-        dd( $kiemtra);
+       return true;
       }
     
     }
