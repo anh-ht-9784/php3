@@ -18,59 +18,73 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', function () {
-    return view('hello');
-});
+    return view('welcom');
+})->name('index');
 
-Route::group([
-    'prefix' => 'admin',
-    'as' => 'admin.',
-    'namespace' => 'Admin',
-], function () {
+// Đăng Nhập
+
+Route::get('login', 'Auth\LoginController@getLoginForm')->name('auth.getLoginForm');
+Route::post('login', 'Auth\LoginController@login')->name('auth.login');
+Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
+
+// end
+
+// admin
+Route::group(['middleware' => 'check_login',], function () {
+    Route::group([
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'namespace' => 'Admin',
+        
+        
+    ], function () {
     
-    // Người dùng
-
-    Route::group([
-        'prefix' => 'users',
-        'as' => 'users.'
-    ], function (){
-    Route::get('/', 'UserController@index')->name('index');
-    Route::get('create', 'UserController@create')->name('create');
-    Route::get('/{user}', 'UserController@show')->name('show');
-    // Route::get('/{id}', 'UserController@show')->name('show');
-    Route::post('store', 'UserController@store')->name('store');
-    Route::get('edit/{id}', 'UserController@edit')->name('edit');
-    Route::post('update/{user}', 'UserController@update')->name('update');
-    Route::post('delete/{id}', 'UserController@delete')->name('delete');
-    });
-
-    //  Danh Mục
-
-    Route::group([
-        'prefix' => 'categories',
-        'as' => 'categories.'
-    ], function (){
-    Route::get('/', 'CategoryController@index')->name('index');
-    Route::get('create', 'CategoryController@create')->name('create');
-    Route::post('store', 'CategoryController@store')->name('store');
-    Route::get('edit/{id}', 'CategoryController@edit')->name('edit');
-    Route::post('update/{id}', 'CategoryController@update')->name('update');
-    Route::post('delete/{id}', 'CategoryController@delete')->name('delete');
-    });
-
-    //  Sản Phẩm
-
-    Route::group([
-        'prefix' => 'products',
-        'as' => 'products.'
-    ], function (){
-    Route::get('/', 'ProductController@index')->name('index');
-    Route::get('create', 'ProductController@create')->name('create');
-    Route::post('store', 'ProductController@store')->name('store');
-    Route::get('edit/{id}', 'ProductController@edit')->name('edit');
-    Route::post('update/{id}', 'ProductController@update')->name('update');
-    Route::post('delete/{id}', 'ProductController@delete')->name('delete');
+        // Người dùng
+    
+        Route::group([
+            'prefix' => 'users',
+            'as' => 'users.',
+            'middleware' => 'check_admin',
+        ], function () {
+            Route::get('/', 'UserController@index')->name('index');
+            Route::get('create', 'UserController@create')->name('create');
+            Route::get('/{user}', 'UserController@show')->name('show');
+            Route::post('store', 'UserController@store')->name('store');
+            Route::get('edit/{id}', 'UserController@edit')->name('edit');
+            Route::post('update/{user}', 'UserController@update')->name('update');
+            Route::post('delete/{id}', 'UserController@delete')->name('delete');
+        });
+    
+        //  Danh Mục
+    
+        Route::group([
+            'prefix' => 'categories',
+            'as' => 'categories.'
+        ], function () {
+            Route::get('/', 'CategoryController@index')->name('index');
+            Route::get('create', 'CategoryController@create')->name('create');
+            Route::post('store', 'CategoryController@store')->name('store');
+            Route::get('edit/{id}', 'CategoryController@edit')->name('edit');
+            Route::post('update/{id}', 'CategoryController@update')->name('update');
+            Route::post('delete/{id}', 'CategoryController@delete')->name('delete');
+        });
+    
+        //  Sản Phẩm
+    
+        Route::group([
+            'prefix' => 'products',
+            'as' => 'products.'
+        ], function () {
+            Route::get('/', 'ProductController@index')->name('index');
+            Route::get('create', 'ProductController@create')->name('create');
+            Route::post('store', 'ProductController@store')->name('store');
+            Route::get('edit/{id}', 'ProductController@edit')->name('edit');
+            Route::post('update/{id}', 'ProductController@update')->name('update');
+            Route::post('delete/{id}', 'ProductController@delete')->name('delete');
+        });
     });
 });
+
 
 
 

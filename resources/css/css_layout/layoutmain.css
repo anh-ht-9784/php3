@@ -1,0 +1,136 @@
+
+
+    /* trang chủ */
+
+.card{
+    width: 100%;
+    overflow: hidden;
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card p a{
+    color: white;
+    text-decoration: none;
+}
+.card-body-1>p{
+    margin-top: 1rem;
+}
+.card-body-1{
+    width: 100%;
+    background-color: #C82333;
+    position: absolute;
+    margin-top:50%;
+    text-align: center;
+    color: white;
+    opacity: 0;
+}
+.card:hover div.card-body-1{
+    opacity: 1;
+    transform: translateY(5px);
+    transition:ease-in-out 0.5s;
+
+}
+.card:hover img{
+    transform: scale(1.2);
+    transition: all ease-in-out 0.5s;
+}
+/* end trgang chủ
+
+
+/* header */
+header{
+    background-color: black !important;
+}
+.top-header , .banner-top{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.top-header{
+
+    color: white;
+    height: 50px;
+}
+.top-header div{
+    margin-top: 15px !important;
+}
+
+nav{
+    width: 97%;
+    margin: auto;
+
+    color: white;
+    border-top: 1px solid white;
+}
+nav a{
+    color: white !important;
+}
+/* header */
+
+/* footer */
+footer ,.list-group-item{
+    background-color: black !important;
+    color: white;
+
+}
+.list-group-item a{
+    vertical-align:middle;
+}
+.foot-icon{
+    display: block;
+    padding-left: 1.4rem;
+}
+.footer-tt{
+    border-top: 1px solid white;
+    background-color: black;
+    color: white;
+    height: 50px;
+    padding-top: 10px;
+    padding-left: 160px;
+}
+footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+}
+.card-title {
+    font-size: 35px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+header {
+    position: fixed;
+    /*Cho menu cố định 1 vị trí với top và left*/
+    top: 0;
+    /*Nằm trên cùng*/
+    right: 0;
+    left: 0;
+    z-index: 100000;
+    /*Hiển thị lớp trên cùng*/
+
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.top-header {
+    font-size: 14px;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.navbar {
+    /*Cho text canh giữa menu*/
+    position: relative;
+
+}
+.nav-link {
+    margin-left: 30px;
+    font-size: 13px;
+    color: gray !important;
+
+}
+.navbar-nav :hover .nav-link{
+    color: white !important;
+}
+.login-header {
+    font-size: 13px;
+}
