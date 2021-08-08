@@ -18,7 +18,7 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', function () {
-    return view('welcom');
+    return view('welcome');
 })->name('index');
 
 // Đăng Nhập

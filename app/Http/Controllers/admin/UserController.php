@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\Admin\User\StoreRequest;
 use App\Http\Requests\Admin\User\UpdateRequest;
-
+use Illuminate\Support\Facades\Gate;
 class UserController extends Controller 
 {
     public function index(Request $request)
@@ -33,7 +33,10 @@ class UserController extends Controller
       return view('admin/users/show', ['user' => $user]);
     }
     public function create()
-    {
+    {   
+       if( Gate::allows('create-user') == false){
+           abort(403);
+       }
         return view('admin/users/create');
     }
     public function store(StoreRequest $request )
