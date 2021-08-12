@@ -17,12 +17,15 @@ class Product extends Model
         'name',
         'price',
         'quantity',
-        'category_id',
+        'category_id', 
         'image',
        
     ];
     public function categories(){
         return $this->belongsTo(Category::class, 'category_id' , 'id');
+    }
+    public function invoiceDetails(){
+        return $this->hasMany(InvoiceDetail::class, 'product_id', 'id');
     }
 }
 

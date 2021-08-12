@@ -17,9 +17,16 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+// frontend
+Route::get('/', 'frontend\index@index')->name('frontend.index');
+Route::get('/product', 'frontend\index@product')->name('frontend.product');
+Route::get('/detail/{id}', 'frontend\index@detail')->name('frontend.detail');
+Route::get('/add_cart/{id}', 'frontend\index@addcart')->name('frontend.add_cart');
+Route::get('/cart', 'frontend\index@cart')->name('frontend.cart');
+Route::get('/save_cart', 'frontend\index@save_cart')->name('frontend.save_cart');
+
+
+
 
 // Đăng Nhập
 
@@ -35,12 +42,10 @@ Route::group(['middleware' => 'check_login',], function () {
         'prefix' => 'admin',
         'as' => 'admin.',
         'namespace' => 'Admin',
-        
-        
     ], function () {
-    
+
         // Người dùng
-    
+
         Route::group([
             'prefix' => 'users',
             'as' => 'users.',
@@ -54,9 +59,9 @@ Route::group(['middleware' => 'check_login',], function () {
             Route::post('update/{user}', 'UserController@update')->name('update');
             Route::post('delete/{id}', 'UserController@delete')->name('delete');
         });
-    
+
         //  Danh Mục
-    
+
         Route::group([
             'prefix' => 'categories',
             'as' => 'categories.'
@@ -68,9 +73,9 @@ Route::group(['middleware' => 'check_login',], function () {
             Route::post('update/{id}', 'CategoryController@update')->name('update');
             Route::post('delete/{id}', 'CategoryController@delete')->name('delete');
         });
-    
+
         //  Sản Phẩm
-    
+
         Route::group([
             'prefix' => 'products',
             'as' => 'products.'
@@ -81,6 +86,22 @@ Route::group(['middleware' => 'check_login',], function () {
             Route::get('edit/{id}', 'ProductController@edit')->name('edit');
             Route::post('update/{id}', 'ProductController@update')->name('update');
             Route::post('delete/{id}', 'ProductController@delete')->name('delete');
+        });
+
+        // Hóa đơn
+
+        Route::group([
+            'prefix' => 'invoices',
+            'as' => 'invoices.'
+        ], function () {
+            Route::get('/', 'InvoiceController@index')->name('index');
+            Route::get('create', 'InvoiceController@create')->name('create');
+            Route::get('/{id}', 'InvoiceController@show')->name('show');
+            Route::post('store', 'InvoiceController@store')->name('store');
+            Route::get('edit/{id}', 'InvoiceController@edit')->name('edit');
+            Route::post('update/{id}', 'InvoiceController@update')->name('update');
+            Route::post('delete/{id}', 'InvoiceController@delete')->name('delete');
+
         });
     });
 });
@@ -128,22 +149,22 @@ Route::group(['middleware' => 'check_login',], function () {
 //             // dd($list);
 //             return view('admin/categories/index', ['data' => $list]);
 //         })->name('admin.categories.index');
-    
+
 //         // create
 //         Route::view('create', 'admin.categories.create')->name('admin.categories.create');
-    
+
 //         Route::post('store', function () {
-    
+
 //             $data = request()->except("_token");
-    
-    
+
+
 //             Category::Create($data);
-    
+
 //             return redirect()->route('admin.categories.index');
 //         })->name('admin.categories.store');
 //         // end create
-    
-//         // edit 
+
+//         // edit
 //         Route::get('edit/{id}', function ($id) {
 //             $data = Category::find($id);
 //             return view('admin/categories/edit', ['data' => $data]);
@@ -151,15 +172,15 @@ Route::group(['middleware' => 'check_login',], function () {
 //         Route::post('update/{id}', function ($id) {
 //             $categories = Category::find($id);
 //             $data = request()->except("_token");
-    
+
 //             $categories->update($data);
 //             return redirect()->route('admin.categories.index');
 //         })->name('admin.categories.update');
 //         // end edit
-    
+
 //         // delete
 //         Route::post('delete/{id}', function ($id) {
-    
+
 //             $categories = Category::find($id);
 //             $categories->delete($id);
 //             return redirect()->route('admin.categories.index');

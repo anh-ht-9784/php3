@@ -7,7 +7,9 @@
       <div class="col-md-12">
         <input type="text" class="form-control" value="{{$data->name}}" name="name" placeholder="Tên">
       </div>
-     
+      @error('name')
+      <span class="">{{ $message }}</span>
+      @enderror
     <button class="mt-2"type="submit">Update</button>
   </form>
 @endsection 

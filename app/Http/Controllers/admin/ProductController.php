@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Http\Requests\Admin\Product\UpdateProducts;
+use App\Http\Requests\Admin\Product\StoreProducts;
 
 class ProductController extends Controller
 {
@@ -22,10 +24,18 @@ class ProductController extends Controller
         $list = Category::all();
         return view('admin/products/create', ['data' => $list]);
     }
-    public function store()
+    public function store(StoreProducts  $request )
     {
+
         $data = request()->except("_token");
-        $data['image'] = 'https://e1.pngegg.com/pngimages/925/517/png-clipart-coraje-courage-the-cowardly-dog-illustration-thumbnail.png';
+        if (empty($data['image']) == false) {
+            $image = request()->file('image');
+            $image_name = $image->getClientOriginalName();
+            request()->file('image')->storeAs('/public/images/products', $image_name);
+            $data['image'] = $image_name;
+        } else {
+            $data['image'] ="giang-ho-tien-bip-noi-tham-lam.jpeg";
+        }
 
         Product::Create($data);
 
@@ -40,9 +50,17 @@ class ProductController extends Controller
     public function update($id)
     {
         $Product = Product::find($id);
-        $data = request()->except("_token");
-        $data['image'] = 'https://e1.pngegg.com/pngimages/925/517/png-clipart-coraje-courage-the-cowardly-dog-illustration-thumbnail.png';
-
+        $request= request();
+        $data = request()->except("_token","image_old");
+        if (empty($data['image']) == false) {
+            $image = request()->file('image');
+            $image_name = $image->getClientOriginalName();
+            request()->file('image')->storeAs('/public/images/products', $image_name);
+            $data['image'] = $image_name;
+        } else {
+            $data['image'] =$request['image_old'];
+        }
+        
         $Product->update($data);
         return redirect()->route('admin.products.index');
     }

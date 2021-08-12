@@ -27,7 +27,7 @@
                         <td>{{ $c->quantity }}</td>
                         <td>{{ $c->categories->name }}</td>
                         <td>
-                            <image src="{{ $c->image }}">
+                            <image src="{{asset("storage/images/products/$c->image")}}" with="800px" height="100px" width="100px    ">
                         </td>
 
                         <td>

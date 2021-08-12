@@ -22,11 +22,11 @@ class Invoice extends Model
     public function invoiceDetails(){
         return $this->hasMany(InvoiceDetail::class, 'invoice_id', 'id');
     }
-    public function user(){
-        return $this->belongsTo(User::class, 'invoice_id', 'id');
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function getTotalPriceAttribute($value){
-        // tên function bắt buộc phai đặt đung
-     return  $value = $this->attributes['total_price']." vnd";
-    }
+    // public function getTotalPriceAttribute($value){
+    //     // tên function bắt buộc phai đặt đung
+    //  return  $value = $this->attributes['total_price']." vnd";
+//     }
 }

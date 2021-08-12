@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
-
+use App\Http\Requests\Admin\Category\StoreCategories;
+use App\Http\Requests\Admin\Category\UpdateCategories;
 class CategoryController extends Controller
 {
     public function index()
@@ -21,9 +22,9 @@ class CategoryController extends Controller
     {
         return view('admin/categories/create');
     }
-    public function store()
+    public function store(StoreCategories $request)
     {
-        $data = request()->except("_token");
+        $data = request()->except("_token");    
 
 
         Category::Create($data);
@@ -35,7 +36,7 @@ class CategoryController extends Controller
         $data = Category::find($id);
         return view('admin/categories/edit', ['data' => $data]);
     }
-    public function update($id)
+    public function update(StoreCategories $request ,$id)
     {
         $categories = Category::find($id);
         $data = request()->except("_token");

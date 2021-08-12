@@ -1,19 +1,14 @@
 @extends("layout")
 @section('title', 'Tạo Mới Danh Mục')
 @section('content')
-<div class="">
-    <form action="{{ route('admin.users.index') }}" method="get">
-        <input class="form-control col-4" type="text" name="keyword" value="{{ old('keyword') }}">
-        <button class="btn btn-primary">Tìm Kiếm</button>
-    </form>
-</div>
-    <div class="col-6">
-        {{-- <div class="col-6">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-success">Creat</a>
-        </div> --}}
-        <button class="btn btn-success" role="button" data-toggle="modal" data-target="#modal_create">Create</button>
 
-        <div class="modal fade" id="modal_create" tabindex="-1" role="dialog">
+    <div class="col-6">
+        <div class="col-6">
+            <a href="{{ route('admin.users.create') }}" class="btn btn-success">Creat</a>
+        </div>
+        {{-- <button class="btn btn-success" role="button" data-toggle="modal" data-target="#modal_create">Create</button> --}}
+
+        {{-- <div class="modal fade" id="modal_create" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -75,7 +70,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     @if (!empty($data))
         <table class="table">

@@ -29,15 +29,15 @@ class LoginController extends Controller
 
             return back();
         }
-
+        
         $user = Auth::user();
-
-        return redirect()->route('admin.users.index');
+        request()->session()->push('auth',  $data);
+        return redirect()->route('frontend.index');
     }
 
     public function logout(Request $request) {
         Auth::logout();
-
+        $request->session()->flush();
         return redirect()->route('auth.getLoginForm');
     }
 }
