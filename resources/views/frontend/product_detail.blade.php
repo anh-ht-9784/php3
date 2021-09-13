@@ -20,7 +20,7 @@
             <img src="{{asset("storage/images/products/$cate->image")}}"  width="400px" height="300px">
             <div class="card-body">
                 <h5 class="card-title">{{$cate->name}}</h5>
-                <p class="card-text"> Giá Tiền : {{$cate->price}} USD</p>
+                <p class="card-text"> Giá Tiền : {{$cate->price}} VND</p>
                 <a href="#" class="btn btn-primary">Mua Hàng</a>
             </div>
             </div>

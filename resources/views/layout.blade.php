@@ -105,7 +105,7 @@
 </head>
 
 <body id="page-top">
-
+ 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -124,6 +124,11 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('frontend.index') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span> Trang chủ</span></a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('admin.users.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -222,11 +227,7 @@
 
 
 
-                    <form action="{{ route('admin.users.index') }}" method="get"
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <input class="form-control col-4" type="text" name="keyword" value="{{ old('keyword') }}">
-                    <button class="btn btn-primary">Tìm Kiếm</button>
-                </form>
+               
 
 
 
@@ -292,7 +293,7 @@
 
     <!-- Page level plugins -->
     <script src="{{ asset('storage/theme/vendor/chart.js/Chart.min.js') }}"></script>
-
+    
 
     <!-- Page level custom scripts -->
 

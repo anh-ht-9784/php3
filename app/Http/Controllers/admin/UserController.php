@@ -34,9 +34,9 @@ class UserController extends Controller
     }
     public function create()
     {   
-       if( Gate::allows('create-user') == false){
-           abort(403);
-       }
+    //    if( Gate::allows('create-user') == false){
+    //        abort(403);
+    //    }
         return view('admin/users/create');
     }
     public function store(StoreRequest $request )

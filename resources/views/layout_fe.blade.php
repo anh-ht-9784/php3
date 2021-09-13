@@ -24,19 +24,20 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
-
+    @stack('scripts')
 </head>
 
 
 <body>
     <header>
 
+
         <div class="top-header">
-            <div style="padding-left: 40px;">ANHHTPH10133</div>
+            <div style="padding-left: 40px;"> ANHHTPH10133</div>
 
         </div>
         <nav class="navbar navbar-expand-lg navbar-light ">
-            <a class="navbar-brand" href="">N Ộ I T H Ấ T N H Ậ P K H Ẩ U S T O R E</a>
+            <a class="navbar-brand" href="{{ route('frontend.index') }}">D I Ệ N T H O Ạ I S T O R E</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,26 +55,31 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">GIỚI THIỆU</a>
                     </li>
-                    <li class="nav-item">
-                         <a href="{{ route('frontend.cart') }}" class="nav-link">Giỏ Hàng</a>
-                    </li>
+                    @auth
+                        <li class="nav-item">
+                            <a href="{{ route('frontend.cart') }}" class="nav-link">Giỏ Hàng</a>
+                        </li>
+                    @endauth
+
+
                 </ul>
 
 
             </div>
-            
+
             </div>
             <div class="login-header" style="margin-left: 300px">
 
                 <div class="" style="float: left !important;">
                     @auth
-                        <a href="{{ route('auth.logout') }}" class="text-decoration">Đăng xuất</a> / <a href="{{ route('admin.users.index') }}" class="text-decoration">Quản Trị</a>
+                        <a href="{{ route('auth.logout') }}" class="text-decoration">Đăng xuất</a> / <a
+                            href="{{ route('admin.users.index') }}" class="text-decoration">Quản Trị</a>
                     @endauth
                     @if (Auth::check() == false)
                         <a href="{{ route('auth.login') }}" class="text-decoration">Đăng Nhập</a>
                     @endif
 
-                   
+
                 </div>
             </div>
             </div>
@@ -82,14 +88,13 @@
 
     </header>
 
-
     <article style="padding-top:200px">
         @yield('content')
     </article>
 
 
     <div class="footer-banner">
-        <img width="100%" height="200" src="" alt="" />
+        <img width="100%" height="200" src="{{ asset('storage/images/banner/banner.png') }}" alt="" />
     </div>
 
     <footer style="padding-left: 150px ; height: 250px; padding-top: 30px;">
@@ -142,6 +147,10 @@
     <div class="footer-tt">
         Chính Sách | Quy Chế Hoạt Động | Điều Khoản và Điều Kiện | Chủ Sở Hữu
     </div>
+
+
+
+
 
 
 </body>

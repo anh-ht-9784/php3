@@ -41,3 +41,10 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+@if (session()->has('success'))
+<script >
+    alert( {{ session()->pull('success')}});
+</script>
+@endif
+@endpush

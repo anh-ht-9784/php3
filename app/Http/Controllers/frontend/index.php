@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Product;
 
 class index extends Controller
@@ -21,7 +22,7 @@ class index extends Controller
     public function detail($id)
     {
         $list = Product::find($id);
-        $category = Product::all()->where('category_id',$list['category_id']);
+        $category = Product::all()->where('category_id',$list['category_id'])->take(3);
 
         return view('frontend/product_detail', ['data' => $list,'category'=>$category]);
 
@@ -49,24 +50,52 @@ class index extends Controller
      request()->session()->push('add_to_cart',  $product);
         $data = request()->session()->get('add_to_cart');
       
-       
-      return redirect()->back()->with('success', 'Thêm sản phẩm thành công');
+        
+        return redirect()->route('frontend.index');
     }
     public function cart( )
     {     
         $data = request()->session()->get('add_to_cart');
-       
+       if($data != null){
         $data  = array_unique($data, SORT_REGULAR);
-
+       }
         return view('frontend/cart', ['data' => $data]);
     }
     public function save_cart( )
     {     
+        $total_price=0;
+        $user = Auth::user();
+        $userdrtail = request()->except("_token");
         $data = request()->session()->get('add_to_cart');
-       
         $data  = array_unique($data, SORT_REGULAR);
-         
-        dd(request()->session()->all());
+        foreach($data as $c){
+            $total_price  += $c['price'] ;
+        }       
+        $invoice = [
+               'user_id' => $user->id,
+               'name' => $user->name,
+               'number' => $userdrtail['number'],
+               'address' => $userdrtail['address'],
+               'total_price' =>  $total_price,
+               'status' => 1
+        ];
+       $update = Invoice::Create($invoice);
+       foreach($data as $c){
+        $invoicedetail=[ 
+            'invoice_id' => $update->id,
+            'product_id'=>$c['id'], 
+            'unit_price'=>$c['price']*$c['quantity'], 
+            'quantity' => $c['quantity']
+        ];
+        InvoiceDetail::Create($invoicedetail);
+    }
+    request()->session()->forget('add_to_cart');
+    return redirect()->route('frontend.index', ['success' => 'Thêm vào Thành công']);
        
+    }
+    public function delete_cart( )
+    {  
+        request()->session()->forget('add_to_cart');
+        return redirect()->route('frontend.index');
     }
 }

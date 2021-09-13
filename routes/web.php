@@ -21,11 +21,18 @@ use App\Http\Controllers\Controller;
 Route::get('/', 'frontend\index@index')->name('frontend.index');
 Route::get('/product', 'frontend\index@product')->name('frontend.product');
 Route::get('/detail/{id}', 'frontend\index@detail')->name('frontend.detail');
-Route::get('/add_cart/{id}', 'frontend\index@addcart')->name('frontend.add_cart');
-Route::get('/cart', 'frontend\index@cart')->name('frontend.cart');
-Route::get('/save_cart', 'frontend\index@save_cart')->name('frontend.save_cart');
 
+    Route::group([
+        'middleware' => 'check_login',
+        'as' => 'frontend.',
+        'namespace' => 'frontend',
+    ], function () {
+Route::get('/add_cart/{id}', 'index@addcart')->name('add_cart');
+Route::get('/cart', 'index@cart')->name('cart');
+Route::get('/save_cart', 'index@save_cart')->name('save_cart');
+Route::get('/delete_cart', 'index@delete_cart')->name('delete_cart');
 
+    });
 
 
 // Đăng Nhập
@@ -142,68 +149,3 @@ Route::group(['middleware' => 'check_login',], function () {
 
 
 
-// Route::group(['prefix' => '/admin'], function () {
-//     Route::group(['prefix' => 'categories'], function () {
-//         Route::get('', function () {
-//             $list = Category::all();
-//             // dd($list);
-//             return view('admin/categories/index', ['data' => $list]);
-//         })->name('admin.categories.index');
-
-//         // create
-//         Route::view('create', 'admin.categories.create')->name('admin.categories.create');
-
-//         Route::post('store', function () {
-
-//             $data = request()->except("_token");
-
-
-//             Category::Create($data);
-
-//             return redirect()->route('admin.categories.index');
-//         })->name('admin.categories.store');
-//         // end create
-
-//         // edit
-//         Route::get('edit/{id}', function ($id) {
-//             $data = Category::find($id);
-//             return view('admin/categories/edit', ['data' => $data]);
-//         })->name('admin.categories.edit');
-//         Route::post('update/{id}', function ($id) {
-//             $categories = Category::find($id);
-//             $data = request()->except("_token");
-
-//             $categories->update($data);
-//             return redirect()->route('admin.categories.index');
-//         })->name('admin.categories.update');
-//         // end edit
-
-//         // delete
-//         Route::post('delete/{id}', function ($id) {
-
-//             $categories = Category::find($id);
-//             $categories->delete($id);
-//             return redirect()->route('admin.categories.index');
-//         })->name('admin.categories.delete');
-//     });
-//     });
-
-// Route::group(['prefix' => '/admin'], function () {
-//     Route::get('products', function () {
-//         $list = Product::all();
-//         // dd($list);
-//         return view('admin/products/index', ['data' => $list]);
-//     })->name('admin.products.index');
-//     //  Create
-//     Route::view('/products/create', '/users/create')->name('admin.products.create');
-
-//     Route::post('products/store', function () {
-
-//         $data = request()->except("_token");
-
-
-//         Product::Create($data);
-
-//         return redirect()->route('admin.products.index');
-//     })->name('admin.products.store');
-// });

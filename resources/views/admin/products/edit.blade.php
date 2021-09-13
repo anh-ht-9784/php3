@@ -9,11 +9,11 @@
             </div>
             <div class="col-md-12">
                 <input type="number" class="form-control" name="price" value="{{ $data->price }}" placeholder="Giá" min="1"
-                    max="500000">
+                    max="5000000000">
             </div>
             <div class="col-md-12">
                 <input type="number" class="form-control" placeholder="Số Lượng" value="{{ $data->quantity }}"
-                    name="quantity" min="1" max="500000">
+                    name="quantity" min="1" max="500000000">
             </div>
             <div class="col-md-12">
                 <input type="file" name="image" placeholder="Ảnh" id="">
@@ -34,7 +34,7 @@
                     @endforeach;
                 </select>
             </div>
-            <button class="mt-2 col-4" type="submit">Tạo Mới</button>
+            <button class="mt-2 col-4" type="submit">Chỉnh Sửa</button>
     </form>
 @endsection
  

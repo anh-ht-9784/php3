@@ -22,10 +22,10 @@
         @foreach ($list as $data)
       <tr>
         <th scope="row">{{$data->id}}</th>
-        <td>{{$data->users->name}}</td>
+        <td><a href="{{route('admin.invoices.show',['id' => $data->id])}}">{{$data->users->name}}</a></td>
         <td>{{$data->address}}</td>
         <td>{{$data->number}}</td>
-        <td>{{$data->total_price}}</td>
+        <td>{{$data->total_price}} VND</td>
         <td>  @foreach (config('common.invoice.status') as $key => $value)
           @if($data->status == $value)
             {{ $key }}
